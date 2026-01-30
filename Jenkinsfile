@@ -7,12 +7,6 @@ pipeline {
     booleanParam(name: 'TF_APPLY', defaultValue: 'false', description: '')
   }
     stages{
-      stage('git clone') {
-          steps {
-                git branch: 'main',
-                url: 'https://github.com/gayathrimallisetti118-sys/eks-cluster.git'
-            }
-         }
          stage('Terraform Init') { 
              when {
                 expression { TF_INIT == 'true' }
@@ -47,6 +41,7 @@ pipeline {
     }
  }
 }
+
 
 
 
