@@ -10,7 +10,7 @@ pipeline {
       stage('git clone') {
           steps {
                 git branch: 'main',
-                url: 'https://github.com/gayathrimallisetti118-sys/learn-terraform-provision-eks-cluster.git'
+                url: 'https://github.com/gayathrimallisetti118-sys/eks-cluster.git'
             }
          }
          stage('Terraform Init') { 
@@ -47,6 +47,7 @@ pipeline {
     }
  }
 }
+
 
 
 
