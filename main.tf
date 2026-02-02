@@ -73,25 +73,41 @@ module "eks" {
   }
 
   eks_managed_node_groups = {
-    one = {
-      name = "node-group-1"
-
-      instance_types = ["t3.small"]
-
-      min_size     = 1
-      max_size     = 3
-      desired_size = 2
-    }
-
-    two = {
-      name = "node-group-2"
+    frontend = {
+      name = "frontend"
 
       instance_types = ["t3.small"]
 
       min_size     = 1
       max_size     = 2
       desired_size = 1
+
+      bootstrap_extra_args = "--kubectl-exta-args '--node-labels=application=reactjs'"
     }
+
+    backend = {
+      name = "backend"
+
+      instance_types = ["t3.small"]
+
+      min_size     = 1
+      max_size     = 2
+      desired_size = 1
+
+      bootstrap_extra_args = "--kubectl-exta-args '--node-labels=application=java'"
+    }
+
+   database = {
+     name = "database"
+
+     instance_types = ["t3.medium"]
+  
+     min_size     = 1
+     max_size     = 2
+     desired_size = 1
+
+     bootstrap_extra_args = "--kubectl-exta-args '--node-labels=application=database'"
+   }      
   }
 }
 
