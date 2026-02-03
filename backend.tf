@@ -1,4 +1,4 @@
-form {
+terraform {
   backend "s3" {
     bucket = "awscluster-backend"
     key    = "terraform.tfstate"
