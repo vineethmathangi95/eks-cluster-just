@@ -3,6 +3,6 @@ terraform {
     bucket = "awscluster-backend"
     key    = "terraform.tfstate"
     region = "us-west-2"
-    use-lockfile = true
+    use_lockfile = true
   }
 }
