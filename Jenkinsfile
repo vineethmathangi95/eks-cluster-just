@@ -12,7 +12,7 @@ pipeline {
                 expression { params.TF_INIT  }
         }
             steps {
-                sh 'terraform init'
+              sh 'terraform init -migrate-state -force-copy'
             }
          }
          stage('Terraform Validate') {
@@ -41,6 +41,7 @@ pipeline {
     }
  }
 }
+
 
 
 
