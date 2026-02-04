@@ -4,7 +4,7 @@ pipeline {
     booleanParam(name: 'TF_INIT', defaultValue: 'true', description: '')
     booleanParam(name: 'TF_VALIDATE', defaultValue: 'true', description: '')
     booleanParam(name: 'TF_PLAN', defaultValue: 'true', description: '')
-    booleanParam(name: 'TF_APPLY', defaultValue: 'false', description: '')
+    booleanParam(name: 'TF_APPLY', defaultValue: 'true', description: '')
     booleanParam(name: 'TF_DESTROY', defaultValue: 'true', description: '')
   }
     stages{
@@ -50,6 +50,7 @@ pipeline {
     }   
  }
 }
+
 
 
 
