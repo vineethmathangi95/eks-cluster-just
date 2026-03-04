@@ -1,4 +1,4 @@
-terraform {
+/*terraform {
   backend "s3" {
     bucket = "awscluster-backend"
     key    = "terraform.tfstate"
@@ -6,3 +6,4 @@ terraform {
     use_lockfile = true
   }
 }
+*/
