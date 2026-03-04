@@ -1,6 +1,3 @@
-# Copyright (c) HashiCorp, Inc.
-# SPDX-License-Identifier: MPL-2.0
-
 provider "aws" {
   region = var.region
 }
@@ -27,7 +24,7 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "5.8.1"
 
-  name = "three-tier-vpc"
+  name = "three-tier"
 
   cidr = "10.0.0.0/16"
   azs  = slice(data.aws_availability_zones.available.names, 0, 3)
@@ -48,12 +45,15 @@ module "vpc" {
   }
 }
 
+###############################################################################
+# EKS Cluster
+###############################################################################
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "20.8.5"
 
   cluster_name    = local.cluster_name
-  cluster_version = "1.29"
+  cluster_version = "1.32"
 
   cluster_endpoint_public_access           = true
   enable_cluster_creator_admin_permissions = true
@@ -74,37 +74,22 @@ module "eks" {
 
   eks_managed_node_groups = {
     frontend = {
-      name = "frontend"
-
       instance_types = ["t3.small"]
-
-      min_size     = 1
-      max_size     = 2
-      desired_size = 1
+      min_size       = 1
+      max_size       = 1
+      desired_size   = 1
+      labels         = { app = "reactjs" }
     }
 
-    backend = {
-      name = "backend"
-
+    java-backend = {
       instance_types = ["t3.small"]
-
-      min_size     = 1
-      max_size     = 2
-      desired_size = 1
+      min_size       = 1
+      max_size       = 1
+      desired_size   = 1
+      labels         = { app = "java" }
     }
-
-   database = {
-     name = "database"
-
-     instance_types = ["t3.small"]
-  
-     min_size     = 1
-     max_size     = 2
-     desired_size = 1
-   }      
   }
 }
-
 
 # https://aws.amazon.com/blogs/containers/amazon-ebs-csi-driver-is-now-generally-available-in-amazon-eks-add-ons/ 
 data "aws_iam_policy" "ebs_csi_policy" {
@@ -120,4 +105,3 @@ module "irsa-ebs-csi" {
   provider_url                  = module.eks.oidc_provider
   role_policy_arns              = [data.aws_iam_policy.ebs_csi_policy.arn]
   oidc_fully_qualified_subjects = ["system:serviceaccount:kube-system:ebs-csi-controller-sa"]
-}
