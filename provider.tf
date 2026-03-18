@@ -28,6 +28,11 @@ data "aws_eks_cluster_auth" "cluster" {
   name = module.eks.cluster_name
 }
 
+data "aws_eks_cluster_auth" "cluster" {
+  name = module.eks.cluster_name
+}
+
+
 # Kubernetes provider (uses EKS module output)
 provider "kubernetes" {
   host                   = module.eks.cluster_endpoint
