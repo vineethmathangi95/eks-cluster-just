@@ -106,3 +106,8 @@ module "irsa-ebs-csi" {
   role_policy_arns              = [data.aws_iam_policy.ebs_csi_policy.arn]
   oidc_fully_qualified_subjects = ["system:serviceaccount:kube-system:ebs-csi-controller-sa"]
 }
+
+/* 
+first remove the all helm and k8 stuff in  providers only run cluster with EBS addon 
+next helm with k8 and CAS metrics server needed >
+*/
