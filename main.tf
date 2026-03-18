@@ -12,7 +12,7 @@ data "aws_availability_zones" "available" {
 }
 
 locals {
-  cluster_name = "three-tier-app-${random_string.suffix.result}"
+  cluster_name = "threetierapp-${random_string.suffix.result}"
 }
 
 resource "random_string" "suffix" {
@@ -24,7 +24,7 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "5.8.1"
 
-  name = "three-tier-app"
+  name = "threetierapp"
 
   cidr = "10.0.0.0/16"
   azs  = slice(data.aws_availability_zones.available.names, 0, 3)
