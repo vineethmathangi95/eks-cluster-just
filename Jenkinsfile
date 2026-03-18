@@ -51,7 +51,7 @@ pipeline {
                 expression { params.TF_APPLY }
             }
             steps {
-                sh 'terraform apply -target=module.eks'
+                sh 'terraform apply -target=module.eks -auto-approve'
                 sh 'terraform apply -auto-approve'
             }
         }
