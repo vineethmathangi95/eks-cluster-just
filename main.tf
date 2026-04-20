@@ -12,7 +12,7 @@ data "aws_availability_zones" "available" {
 }
 
 locals {
-  cluster_name = "threetier-${random_string.suffix.result}"
+  cluster_name = "python-${random_string.suffix.result}"
 }
 
 resource "random_string" "suffix" {
@@ -86,7 +86,7 @@ module "eks" {
       min_size       = 1
       max_size       = 1
       desired_size   = 1
-      labels         = { app = "java" }
+      labels         = { app = "python" }
     }
   }
 }
