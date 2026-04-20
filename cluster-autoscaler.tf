@@ -1,4 +1,4 @@
-/*module "cluster_autoscaler" {
+module "cluster_autoscaler" {
   source = "git::https://github.com/DNXLabs/terraform-aws-eks-cluster-autoscaler.git"
 
   enabled = true
@@ -9,4 +9,4 @@
   aws_region                       = var.region
   helm_chart_version               = "9.35.0"
 }
-*/
+
